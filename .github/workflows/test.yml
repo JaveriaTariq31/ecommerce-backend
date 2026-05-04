@@ -24,6 +24,15 @@ jobs:
           --health-timeout=5s
           --health-retries=5
 
+    env:
+      DB_HOST: localhost
+      DB_PORT: 5432
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
+      DB_NAME: ecommerce_test
+      JWT_SECRET: testsecret
+      JWT_REFRESH_SECRET: refreshsecret
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -35,7 +44,6 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-        working-directory: ./backend
 
       - name: Install PostgreSQL Client
         run: |
@@ -43,23 +51,7 @@ jobs:
           sudo apt-get install -y postgresql-client
 
       - name: Run migrations
-        env:
-          DB_HOST: localhost
-          DB_PORT: 5432
-          DB_USERNAME: postgres
-          DB_PASSWORD: postgres
-          DB_DATABASE: ecommerce_test
         run: npm run migration:run
-        working-directory: ./backend
 
       - name: Run tests
-        env:
-          DB_HOST: localhost
-          DB_PORT: 5432
-          DB_USERNAME: postgres
-          DB_PASSWORD: postgres
-          DB_DATABASE: ecommerce_test
-          JWT_SECRET: testsecret
-          JWT_REFRESH_SECRET: refreshsecret
         run: npm test
-        working-directory: ./backend
