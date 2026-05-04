@@ -9,7 +9,7 @@
     "typeorm": "typeorm",
     "migration:create": "typeorm migration:create src/migrations/CreateResultsTable -o",
     "migration:generate": "typeorm migration:generate -d src/config/data-source.js src/migrations/CreateResultsTable -o ",
-    "migration:run": "npx typeorm migration:run -d src/config/data-source.js",
+    "migration:run": "node ./node_modules/typeorm/cli.js migration:run -d src/config/data-source.js",
     "migration:show": "typeorm migration:show -d src/config/data-source.js",
     "seed": "node src/seeds/seed.js",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
