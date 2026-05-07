@@ -24,10 +24,15 @@ describe("POST /users Integration Test", () => {
 
     // Setup routes
     setupRoutes(userRepository);
+
+    // ensure clean database before test
+    await userRepository.delete({
+      email: testUser.email
+    });
   });
 
   afterAll(async () => {
-    // Cleanup inserted test user
+    // Cleanup test data
     await userRepository.delete({
       email: testUser.email
     });
@@ -46,7 +51,7 @@ describe("POST /users Integration Test", () => {
     expect(response.body.message).toBe("User created successfully");
     expect(response.body.user.email).toBe(testUser.email);
 
-    // Verify user saved in database
+    // Verify user exists in database
     const savedUser = await userRepository.findOneBy({
       email: testUser.email
     });

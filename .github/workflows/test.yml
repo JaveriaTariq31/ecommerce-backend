@@ -15,7 +15,7 @@ jobs:
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: ecommerce_test
+          POSTGRES_DB: web_engineering_db
         ports:
           - 5432:5432
         options: >-
@@ -29,7 +29,7 @@ jobs:
       DB_PORT: 5432
       DB_USERNAME: postgres
       DB_PASSWORD: postgres
-      DB_NAME: ecommerce_test
+      DB_NAME: web_engineering_db
       JWT_SECRET: testsecret
       JWT_REFRESH_SECRET: refreshsecret
 
